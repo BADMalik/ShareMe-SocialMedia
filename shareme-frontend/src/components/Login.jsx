@@ -1,19 +1,62 @@
 import React from 'react'
-import { GoogleLogin } from '@react-oauth/google';
 import { useNavigate } from 'react-router-dom'
 import { FcGoogle } from 'react-icons/fc'
 import shareVideo from '../assets/share.mp4'
 import logo from '../assets/logowhite.png'
-import { useGoogleLogin } from '@react-oauth/google';
-
+import axios from 'axios'
+import { useGoogleOneTapLogin, useGoogleLogin } from '@react-oauth/google';
+// import { useGoogleLogin } from 'react-use-googlelogin'
+import { client } from '../client'
 const Login = () => {
-    const responseGoogle = (e) => {
-        console.log(e)
-    }
+    const navigate = useNavigate()
+    // const login = useGoogleLogin({
+
+    //     onSuccess: tokenResponse => {
+    //         console.log(tokenResponse)
+    //         localStorage.setItem('user', JSON.stringify(tokenResponse))
+    //         const { name, googleId, imageUrl } = tokenResponse
+    //         const doc = {
+    //             _id: googleId,
+    //             _type: 'user',
+    //             userName: name,
+    //             image: imageUrl
+    //         }
+    //         client.createIfNotExists(doc).then(() => navigate('/', { replace: true }))
+    //     }
+    // });
     const login = useGoogleLogin({
-        onSuccess: tokenResponse => console.log(tokenResponse),
+
+        onSuccess: async tokenResponse => {
+            console.log(tokenResponse)
+            const res = await axios.get('https://www.googleapis.com/oauth2/v1/userinfo?access_token=' + tokenResponse.access_token)
+            let userData = { ...res.data, ...tokenResponse }
+
+            localStorage.setItem('user', JSON.stringify(userData))
+            const { name, id, picture } = userData
+            const doc = {
+                _id: id,
+                _type: 'user',
+                userName: name,
+                image: picture
+            }
+            client.createIfNotExists(doc).then((d) => {
+                console.log(d)
+                navigate('/home', { replace: true })
+            })
+        }
+
     });
-    console.log(process.env.REACT_APP_GOOGLE_API_TOKEN)
+    // const login = () => {
+
+    // }
+    useGoogleOneTapLogin({
+        onSuccess: credentialResponse => {
+            console.log(credentialResponse);
+        },
+        onError: () => {
+            console.log('Login Failed');
+        },
+    });
     return (
         <div className='flex flex-col items-center justify-start h-screen'>
             <div className='relative w-full h-full'>
