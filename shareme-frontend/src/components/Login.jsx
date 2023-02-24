@@ -52,6 +52,7 @@ const Login = () => {
     useGoogleOneTapLogin({
         onSuccess: credentialResponse => {
             console.log(credentialResponse);
+            navigate('/home', { replace: true })
         },
         onError: () => {
             console.log('Login Failed');
