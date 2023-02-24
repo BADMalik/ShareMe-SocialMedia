@@ -5,9 +5,9 @@ import {schemaTypes} from './schemas'
 
 export default defineConfig({
   name: 'default',
-  title: 'ShareMe',
+  title: 'shareme-sanity-v3',
 
-  projectId: 'fc936btj',
+  projectId: 'heavdms7',
   dataset: 'production',
 
   plugins: [deskTool(), visionTool()],
