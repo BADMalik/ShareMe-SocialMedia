@@ -9,21 +9,6 @@ import { useGoogleOneTapLogin, useGoogleLogin } from '@react-oauth/google';
 import { client } from '../client'
 const Login = () => {
     const navigate = useNavigate()
-    // const login = useGoogleLogin({
-
-    //     onSuccess: tokenResponse => {
-    //         console.log(tokenResponse)
-    //         localStorage.setItem('user', JSON.stringify(tokenResponse))
-    //         const { name, googleId, imageUrl } = tokenResponse
-    //         const doc = {
-    //             _id: googleId,
-    //             _type: 'user',
-    //             userName: name,
-    //             image: imageUrl
-    //         }
-    //         client.createIfNotExists(doc).then(() => navigate('/', { replace: true }))
-    //     }
-    // });
     const login = useGoogleLogin({
 
         onSuccess: async tokenResponse => {
@@ -46,9 +31,6 @@ const Login = () => {
         }
 
     });
-    // const login = () => {
-
-    // }
     useGoogleOneTapLogin({
         onSuccess: credentialResponse => {
             console.log(credentialResponse);
@@ -69,30 +51,8 @@ const Login = () => {
 
                 </div>
                 <div className='shadow-2xl'>
-                    {/* <GoogleLogin
-                        clientId={process.env.REACT_APP_GOOGLE_API_TOKEN}
-                        render={renderProps => (
-                            <button
-                                onClick={renderProps.onClick}
-                                disabled={renderProps.disabled}
-                                type="submit" className='flex items-center justify-center p-3 rounded-lg outline-none cursor-pointer bg-mainColor'><FcGoogle className='mr-4' /> Sign in with Google
-                            </button>
-                        )}
-                        onSuccess={responseGoogle}
-                        onFailure={responseGoogle}
-                        cookiePolicy="single_host_origin"
-                    /> */}
-                    {/* <GoogleLogin
-                        onSuccess={credentialResponse => {
-                            console.log(credentialResponse);
-                        }}
-                        onError={() => {
-                            console.log('Login Failed');
-                        }}
-                    /> */}
                     <button
                         onClick={login}
-                        // disabled={renderProps.disabled}
                         type="submit" className='flex items-center justify-center p-3 rounded-lg outline-none cursor-pointer bg-mainColor'><FcGoogle className='mr-4' /> Sign in with Google
                     </button>
 
