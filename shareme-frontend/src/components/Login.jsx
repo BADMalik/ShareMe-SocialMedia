@@ -34,12 +34,12 @@ const Login = () => {
     useGoogleOneTapLogin({
         onSuccess: credentialResponse => {
             console.log(credentialResponse);
-            navigate('/home', { replace: true })
         },
         onError: () => {
             console.log('Login Failed');
         },
-    });
+        auto_select: true,
+    },);
     return (
         <div className='flex flex-col items-center justify-start h-screen'>
             <div className='relative w-full h-full'>
