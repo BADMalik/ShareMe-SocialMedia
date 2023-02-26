@@ -126,7 +126,7 @@ const SinglePin = ({
                 >
                   <BsFillArrowUpRightCircleFill />
                   {destination.length > 20
-                    ? destination.slice(8, 20)
+                    ? destination.slice(12, 20)
                     : destination.slice(8)}
                 </a>
               )}
