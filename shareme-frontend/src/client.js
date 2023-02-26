@@ -4,7 +4,7 @@ const config = {
     projectId: process.env.REACT_APP_SANITY_PROJECT_ID,
     dataset: 'production',
     apiVersion: '2023-02-24',
-    useCdn: true,
+    useCdn: false,
     token: process.env.REACT_APP_SANITY_TOKEN,
 }
 
