@@ -146,7 +146,7 @@ const SinglePin = ({
         )}
       </div>
       <Link
-        to={`user-profile/${postedBy?._id}`}
+        to={`/user-profile/${postedBy?._id}`}
         className="flex items-center gap-2 p-1 mt-2 rounded-full shadow-xl "
       >
         <img
